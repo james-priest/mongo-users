@@ -25,9 +25,9 @@ describe('Deleting a user', () => {
       .catch((err) => console.log(err));
   });
 
-  it('class method remove', (done) => {
+  it('class method deleteMany', (done) => {
     // Remove a bunch of records with some given criteria
-    User.remove({ name: 'Joe' })
+    User.deleteMany({ name: 'Joe' })
       .then(() => User.findOne({ name: 'Joe' }))
       .then((user) => {
         assert(user === null);
