@@ -2,6 +2,7 @@
 //   configuring and working with the db easier
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const PostSchema = require('./post');
 
 // User Model represents all of the data in a single collection.
 // When we create a User Model, mongoose will automatically
@@ -10,8 +11,16 @@ const Schema = mongoose.Schema;
 // Schema is just a small portion of a User Model. It is the part
 //   that describes the field names and types
 const UserSchema = new Schema({
-  name: String,
-  postCount: Number
+  name: {
+    type: String,
+    required: [true, 'Name is required.'],
+    validate: {
+      validator: (name) => name.length > 2,
+      message: 'Name must be longer than 2 characters.'
+    }
+  },
+  postCount: Number,
+  posts: [PostSchema]
 });
 
 // user is created if it doesn't already exist and UserSchema
