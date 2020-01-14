@@ -10,7 +10,8 @@ const Schema = mongoose.Schema;
 // Schema is just a small portion of a User Model. It is the part
 //   that describes the field names and types
 const UserSchema = new Schema({
-  name: String
+  name: String,
+  postCount: Number
 });
 
 // user is created if it doesn't already exist and UserSchema
