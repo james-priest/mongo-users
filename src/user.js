@@ -19,8 +19,14 @@ const UserSchema = new Schema({
       message: 'Name must be longer than 2 characters.'
     }
   },
-  postCount: Number,
-  posts: [PostSchema]
+  posts: [PostSchema],
+  likes: Number
+});
+
+// Virtual properties are defined separately on the UserSchema
+UserSchema.virtual('postCount').get(function() {
+  // must use function keyword for `this` to refer to user model
+  return this.posts.length;
 });
 
 // user is created if it doesn't already exist and UserSchema
