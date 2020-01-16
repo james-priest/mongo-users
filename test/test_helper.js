@@ -18,10 +18,15 @@ before((done) => {
 
 // Mocha hook function executed before each test
 beforeEach((done) => {
+  const { users, comments, blogposts } = mongoose.connection.collections;
   // Direct reference to collection of users in the database
   // This is an async operation so we call done when complete
-  mongoose.connection.collections.users.drop(() => {
-    // Call done to signal next test
-    done();
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        // Call done to signal next test
+        done();
+      });
+    });
   });
 });
